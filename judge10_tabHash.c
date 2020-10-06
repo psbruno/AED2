@@ -51,191 +51,63 @@ int remover(Elem *THash, int NB, int Tam,Elem *pRem){
      }else{
        pAux=&THash[NB%Tam];
        if(THash[NB%Tam].prox==NULL)
- 
- 
- 
-            pAux->verific=0;
- 
- 
- 
+            pAux->verific=0; 
         else{
- 
- 
- 
-            while(pAux->prox!=pRem){
- 
- 
- 
-                pAux=pAux->prox;
- 
- 
- 
-            }
- 
- 
- 
+             while(pAux->prox!=pRem){
+                 pAux=pAux->prox;
+             } 
             pAux->prox=NULL;
- 
- 
- 
-            free(pRem);
- 
- 
- 
+            free(pRem); 
         }
  
- 
- 
-        
- 
- 
- 
     }
- 
- 
- 
-  
- 
- 
- 
- 
- 
- 
- 
+
 }
  
  
  
 int busca(Elem *THash, int NB, int Tam){
- 
- 
- 
- 
- 
- 
- 
     Elem *pAux=&THash[NB%Tam];
- 
- 
- 
     if(THash[NB%Tam].verific==0){
- 
          insercao(THash,Tam,NB);
- 
         return 0;
- 
     }else{
- 
- 
- 
         if(pAux->valor==NB){
- 
                     remover(THash,NB, Tam,pAux);
- 
- 
- 
+
                     return 0;
- 
- 
- 
-                }
- 
- 
- 
+          }
+
         while(pAux!=NULL){
- 
                 if(pAux->valor==NB){
- 
                     remover(THash,NB, Tam,pAux);
- 
- 
- 
                     return 0;
- 
- 
- 
                 }
- 
                 pAux=pAux->prox;
- 
- 
- 
         }
- 
- 
- 
- 
- 
- 
- 
     }
- 
- 
- 
+
     insercao(THash, Tam,NB);
- 
- 
- 
 }
- 
- 
- 
- 
- 
- 
+
  
 int imp(Elem *THash, int Tam){
- 
- 
- 
-    int i;
- 
- 
- 
+   int i;
     Elem *pAux;
- 
- 
- 
-    for(i=0;i<Tam;i++){
- 
- 
- 
+   for(i=0;i<Tam;i++){
             printf("[%d]", i);
- 
- 
- 
             if(THash[i].verific!=0)
- 
- 
- 
                 printf(" %d", THash[i].valor);
- 
- 
- 
             pAux=&THash[i];
- 
- 
- 
             while(pAux->prox!=NULL){
- 
- 
- 
                 pAux=pAux->prox;
- 
- 
- 
+
                 printf(" %d", pAux->valor);
- 
- 
- 
+
             }
  
- 
- 
             printf("\n");
- 
- 
- 
+
         }
  
  
