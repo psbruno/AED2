@@ -1,204 +1,56 @@
 #include <stdio.h>
- 
- 
- 
 #include <stdlib.h>
  
- 
- 
- 
- 
- 
- 
-typedef struct{
- 
- 
- 
+typedef struct{ 
     int chave;
- 
- 
- 
     int valor;
- 
- 
- 
     int verific;
- 
- 
- 
     struct Elem *prox;
- 
- 
- 
 }Elem;
  
- 
- 
- 
- 
- 
- 
 int insercao(Elem *THash, int Tam, int NI){
- 
- 
- 
-    
- 
- 
- 
    Elem *pAux;
- 
- 
- 
     if(THash[NI%Tam].verific==0){
- 
- 
- 
-        THash[NI%Tam].chave=NI%Tam;
- 
- 
- 
-        THash[NI%Tam].valor=NI;
- 
- 
- 
-        THash[NI%Tam].verific=1;
- 
- 
- 
- 
- 
- 
- 
-    }else{
- 
- 
- 
- 
- 
- 
- 
-        pAux=&THash[NI%Tam];
- 
- 
- 
-        while(pAux->prox!=NULL){
- 
- 
- 
+        THash[NI%Tam].chave=NI%Tam; 
+        THash[NI%Tam].valor=NI; 
+        THash[NI%Tam].verific=1; 
+    }else{ 
+        pAux=&THash[NI%Tam]; 
+        while(pAux->prox!=NULL){ 
             pAux=pAux->prox;
- 
- 
- 
         }
  
+       pAux->prox=(Elem*)malloc(sizeof(Elem));
+       pAux=pAux->prox;
+       pAux->valor=NI;
+       pAux->chave=NI%Tam; 
+       pAux->prox=NULL;
  
- 
-        pAux->prox=(Elem*)malloc(sizeof(Elem));
- 
- 
- 
-        pAux=pAux->prox;
- 
- 
- 
-        pAux->valor=NI;
- 
- 
- 
-        pAux->chave=NI%Tam;
- 
- 
- 
-        pAux->prox=NULL;
- 
- 
- 
- 
- 
- 
- 
+
     }
- 
- 
- 
- 
- 
- 
- 
 }
- 
  
  
 int remover(Elem *THash, int NB, int Tam,Elem *pRem){
  
- 
- 
     Elem *pAux, *pAux2=pRem;
- 
- 
- 
     if(pRem->prox!=NULL){
- 
- 
- 
-        while(pRem->prox!=NULL){
- 
- 
- 
+         while(pRem->prox!=NULL){
             pAux2=pRem;
- 
- 
- 
             pAux=pRem->prox;
- 
- 
- 
-            pRem->valor=pAux->valor;
- 
- 
- 
-                pRem=pRem->prox;
- 
- 
- 
-            
- 
+             pRem->valor=pAux->valor;
+                 pRem=pRem->prox;
  
  
         }   
  
  
- 
-        
- 
- 
- 
-    
- 
- 
- 
     pAux2->prox=NULL;
- 
- 
- 
     pAux->valor=0;
- 
- 
- 
-   free(pRem);
- 
- 
- 
-    }else{
- 
- 
- 
-        pAux=&THash[NB%Tam];
- 
- 
- 
-        if(THash[NB%Tam].prox==NULL)
+    free(pRem);
+     }else{
+       pAux=&THash[NB%Tam];
+       if(THash[NB%Tam].prox==NULL)
  
  
  
@@ -393,69 +245,25 @@ int imp(Elem *THash, int Tam){
  
  
 int main(){
- 
- 
- 
     int Tam,QNum,i;
- 
- 
- 
     int NI,NB;//numero para insercao, numero a ser pesquisado
- 
- 
- 
     Elem *THash,*pAux;
- 
- 
- 
+
     scanf("%d %d", &Tam,&QNum);
- 
- 
- 
+
     THash=(Elem*)malloc(Tam*sizeof(Elem));
- 
- 
- 
- 
- 
- 
- 
+
     for(i=0;i<Tam;i++){
- 
- 
- 
         THash[i].chave=i;
- 
- 
- 
         THash[i].prox=NULL;
- 
- 
- 
         THash[i].verific=0;
- 
- 
- 
+
     }
- 
- 
- 
- 
- 
- 
- 
+
     for(i=0;i<QNum;i++){
- 
- 
- 
         scanf("%d", &NI);
- 
- 
- 
-        insercao(THash,Tam,NI);
- 
- 
- 
+       insercao(THash,Tam,NI);
+
     }
  
  
